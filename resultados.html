@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resultados - Mesaza BBYO</title>
+  <meta name="theme-color" content="#0A67FF" />
+  <link rel="stylesheet" href="resultados.css" />
+</head>
+<body>
+  <header class="topbar">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/BBYO_Logo.svg" alt="BBYO Logo" class="logo" />
+    <h1>Resultados de la Mesaza</h1>
+  </header>
+
+  <main>
+    <section class="board">
+      <div class="status">
+        <div class="status-line">
+          <span id="statusText">Mostrando animación…</span>
+          <span id="countdown" aria-live="polite">10s</span>
+        </div>
+        <div class="progress">
+          <div id="progressBar"></div>
+        </div>
+      </div>
+
+      <div id="chart" class="chart-container" aria-live="polite" aria-busy="true"></div>
+
+      <div id="winnerBanner" class="winner" hidden>
+        <div class="winner-badge">Ganador</div>
+        <img id="winnerImg" alt="" />
+        <div class="winner-info">
+          <h2 id="winnerName"></h2>
+          <p><strong id="winnerVotes"></strong> votos (<span id="winnerPct"></span>)</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Template de skeleton para carga -->
+  <template id="bar-skeleton">
+    <div class="bar-wrapper skeleton">
+      <div class="bar" style="height: 60px"></div>
+      <div class="bar-meta">
+        <div class="img sk"></div>
+        <div class="name sk"></div>
+      </div>
+    </div>
+  </template>
+
+  <script src="resultados.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+:root{
+  --brand:#0A67FF;      /* BBYO blue */
+  --accent:#00AEEF;     /* celeste */
+  --ink:#0b1220;
+  --bg:#ffffff;
+  --panel:#f4f7ff;
+  --muted:#6b7280;
+  --gold:#fbc02d;
+  --radius:16px;
+  --shadow:0 12px 26px rgba(10,103,255,.12);
+  --maxBar:280px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+.topbar{
+  position:sticky; top:0; z-index:10;
+  background:linear-gradient(180deg, rgba(10,103,255,.08), rgba(255,255,255,.95));
+  border-bottom:1px solid rgba(10,103,255,.15);
+  text-align:center;
+  padding:12px 10px;
+}
+.logo{ height:36px; display:block; margin:0 auto 6px; }
+.topbar h1{
+  margin:0; font-size:1.1rem; color:var(--brand); font-weight:800;
+}
+
+main{ padding:16px; }
+.board{
+  max-width:980px; margin:0 auto;
+  background:var(--panel);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:14px;
+}
+
+.status{
+  margin-bottom:8px;
+}
+.status-line{
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:.95rem; color:var(--muted); margin-bottom:8px;
+}
+.progress{
+  height:8px; background:#e6edff; border-radius:999px; overflow:hidden;
+}
+#progressBar{
+  height:100%; width:0%;
+  background: linear-gradient(90deg, var(--brand), var(--accent));
+  transition: width .2s linear;
+}
+
+.chart-container{
+  display:flex;
+  align-items:flex-end;
+  gap:14px;
+  padding:18px 8px 28px;
+  overflow-x:auto;
+  min-height: calc(var(--maxBar) + 150px);
+}
+
+/* Barras */
+.bar-wrapper{
+  display:flex; flex-direction:column; align-items:center;
+  width:90px; min-width:90px; position:relative;
+}
+.bar{
+  width:100%;
+  height:60px;
+  border-radius:10px 10px 0 0;
+  background: linear-gradient(180deg, #3b82f6, #1a237e);
+  position:relative;
+  transition: height .6s cubic-bezier(.2,.7,.2,1);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 8px 16px rgba(26,35,126,.2);
+}
+.bar::after{ /* brillo vertical leve */
+  content:""; position:absolute; inset:0 0 0 0;
+  background: linear-gradient(90deg, rgba(255,255,255,.15), transparent 35%, transparent 65%, rgba(255,255,255,.12));
+  pointer-events:none;
+}
+.bar-label{
+  position:absolute; top:-24px; left:50%; transform:translateX(-50%);
+  color:var(--gold); font-weight:800; font-size:14px; text-shadow:0 1px 0 rgba(0,0,0,.15);
+}
+
+.bar-meta{
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+}
+.bar-image{
+  width:70px; height:70px; border-radius:50%; object-fit:cover; margin-top:10px;
+  border:2px solid var(--gold); background:#fff;
+}
+.bar-name{
+  max-width:100%; text-align:center; font-size:.84rem; font-weight:700; color:#1a237e;
+}
+
+/* Skeletons */
+.skeleton .bar{ background: linear-gradient(180deg, #dfe9ff, #cfdcfe); }
+.sk{
+  border-radius:999px; background:linear-gradient(90deg, #e6eeff, #f3f6ff 40%, #e6eeff);
+  background-size:200% 100%; animation:shimmer 1.2s infinite;
+}
+.skeleton .img{ width:70px; height:70px; margin-top:10px; }
+.skeleton .name{ width:80px; height:12px; margin-top:8px; }
+@keyframes shimmer{ 0%{background-position:200% 0;} 100%{background-position:-200% 0;} }
+
+/* Ganador */
+.winner{
+  margin-top:8px; display:flex; align-items:center; gap:12px;
+  background:#fff; border-radius:14px; padding:12px;
+  border:1px solid rgba(10,103,255,.15);
+}
+.winner-badge{
+  background: linear-gradient(135deg, #ffd54f, #ffb300);
+  color:#1a237e; font-weight:900; font-size:.8rem; padding:6px 10px; border-radius:999px;
+}
+.winner img{
+  width:54px; height:54px; border-radius:50%; border:2px solid var(--gold); object-fit:cover;
+}
+.winner-info h2{ margin:0; font-size:1.05rem }
+.winner-info p{ margin:2px 0 0; color:var(--muted); }
+
+/* Winner effects */
+.bar-wrapper.winner .bar{
+  background: linear-gradient(180deg, #7ab8ff, #0A67FF);
+  box-shadow:0 14px 26px rgba(10,103,255,.28), inset 0 0 0 2px rgba(251,192,45,.35);
+}
+.bar-wrapper.winner::before{ /* borde animado */
+  content:""; position:absolute; inset:-2px; border-radius:12px;
+  background: conic-gradient(from 0deg, rgba(251,192,45,.0), rgba(251,192,45,.45), rgba(10,103,255,.4), rgba(251,192,45,.0));
+  animation:spin 5s linear infinite; pointer-events:none; opacity:.8;
+}
+@keyframes spin{ to{ transform: rotate(1turn); } }
+
+/* Confetti */
+.confetti{
+  position:absolute; top:0; left:50%;
+  width:8px; height:12px; opacity:0; transform-origin:center;
+  animation: fall linear forwards;
+}
+@keyframes fall{
+  0%{ transform: translate(-50%, -10px) rotate(0deg); opacity:1; }
+  100%{ transform: translate(var(--x), 150%) rotate(var(--r)); opacity:0; }
+}
+
+/* Responsive */
+@media (min-width: 680px){
+  .board{ padding:18px; }
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Comidas</title>
+  <meta name="theme-color" content="#0A67FF" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Elegí tu pack de comida favorito</h1>
+  </header>
+
+  <main>
+    <div id="packs" class="packs-container" aria-live="polite"></div>
+  </main>
+
+  <!-- Skeleton template -->
+  <template id="pack-skeleton">
+    <div class="pack skeleton">
+      <div class="border-anim"></div>
+      <div class="foods">
+        <div class="food"><div class="img shimmer"></div><div class="txt shimmer"></div></div>
+        <div class="food"><div class="img shimmer"></div><div class="txt shimmer"></div></div>
+        <div class="food"><div class="img shimmer"></div><div class="txt shimmer"></div></div>
+        <div class="food"><div class="img shimmer"></div><div class="txt shimmer"></div></div>
+      </div>
+      <button class="btn" disabled>Votar este pack</button>
+    </div>
+  </template>
+
+  <script src="script.js" type="module"></script>
+</body>
+</html>
